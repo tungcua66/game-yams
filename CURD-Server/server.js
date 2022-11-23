@@ -5,20 +5,20 @@ import Jwt from '@hapi/jwt';
 import registerUser from './src/handlers/user/registerUser.js';
 import loginUser from './src/handlers/user/loginUser.js';
 
-import getShop from './src/handlers/shop/getShop.js';
-import getProductByID from './src/handlers/shop/getProductByID.js';
-import createProduct from './src/handlers/shop/createProduct.js';
-import modifyProduct from './src/handlers/shop/modifyProduct.js';
-import getProduct from './src/handlers/shop/getProduct.js';
-import deleteProduct from './src/handlers/shop/deleteProduct.js';
+// import getShop from './src/handlers/shop/getShop.js';
+// import getProductByID from './src/handlers/shop/getProductByID.js';
+// import createProduct from './src/handlers/shop/createProduct.js';
+// import modifyProduct from './src/handlers/shop/modifyProduct.js';
+// import getProduct from './src/handlers/shop/getProduct.js';
+// import deleteProduct from './src/handlers/shop/deleteProduct.js';
 
-import getCategory from './src/handlers/shop/getCategory.js';
-import createCategory from './src/handlers/shop/createCategory.js';
-import modifyCategory from './src/handlers/shop/modifyCategory.js';
-import deleteCategory from './src/handlers/shop/deleteCategory.js';
+// import getCategory from './src/handlers/shop/getCategory.js';
+// import createCategory from './src/handlers/shop/createCategory.js';
+// import modifyCategory from './src/handlers/shop/modifyCategory.js';
+// import deleteCategory from './src/handlers/shop/deleteCategory.js';
 
-import uploadImage from './src/helpers/uploadImage.js';
-import createImage from './src/handlers/image/createImage.js';
+// import uploadImage from './src/helpers/uploadImage.js';
+// import createImage from './src/handlers/image/createImage.js';
 
 const hostPort = process.env.HOST_PORT;
 const host = process.env.HOST;
