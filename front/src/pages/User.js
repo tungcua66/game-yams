@@ -2,7 +2,6 @@
 
 import styled from '@emotion/styled';
 import { css } from '@emotion/css';
-import debounce from 'lodash.debounce';
 import { useNavigate } from 'react-router-dom';
 
 import { connect, useDispatch } from 'react-redux';
@@ -17,6 +16,12 @@ const DivSvg = styled.div(({ width }) => ({
 	display: 'inline-block',
 }));
 
+const SpanDice = styled.span(({ width = '2px', height = '2px' }) => ({
+	width,
+	height,
+	border: '1px solid red',
+}));
+
 const DivContainer = styled.div(() => ({
 	display: 'flex',
 	justifyContent: 'space-between',
@@ -26,24 +31,9 @@ const DivContainer = styled.div(() => ({
 }));
 
 const User = ({
-	userLogin, products, product, setProduct,
+	userLogin,
 }) => {
 	const dispatch = useDispatch();
-
-	// useEffect(() => {
-	// 	dispatch(getProducts());
-	// }, []);
-
-	const updateQuery = (e) => {
-		const dummy = {
-			_id: '1',
-			title: e.target.value,
-			price: 0,
-			description: '',
-		};
-		setProduct(dummy);
-	};
-	const debounceOnChange = debounce(updateQuery, 1000);
 
 	const navigate = useNavigate();
 	const handleLogout = () => {
@@ -60,6 +50,13 @@ const User = ({
 				{/* hello */}
 			</h1>
 			<button css={{ display: 'block' }}> Jouer </button>
+			<div css={{ display: 'block', margin: '10px' }}>
+				<SpanDice> 1</SpanDice>
+				<SpanDice> 2</SpanDice>
+				<SpanDice> 3</SpanDice>
+				<SpanDice> 4</SpanDice>
+				<SpanDice> 5</SpanDice>
+			</div>
 			<DivSvg width="3em" height="10em" onClick={() => handleLogout()}>
 				<Logout />
 				<p> Logout</p>
@@ -74,7 +71,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-	// setProduct: productSliceActions.setProduct,
 
 };
 
