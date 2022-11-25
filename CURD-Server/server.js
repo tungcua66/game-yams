@@ -27,7 +27,7 @@ const dbUrl = process.env.DB_URL;
 const connectDb = async () => {
 	try {
 		await Mongoose.connect(dbUrl);
-		console.log('Connected to day_three database!');
+		console.log('Connected to game_yams database!');
 	} catch (error) {
 		console.log('Connection failed');
 		console.error(error.message);
@@ -57,22 +57,22 @@ const init = async () => {
 			credentials: 'hehe',
 		}),
 	});
-	server.auth.strategy('admin_jwt_strategy', 'jwt', {
-		keys: 'secret',
-		verify: {
-			aud: 'token',
-			iss: 'urn:issuer:test',
-			sub: false,
-			nbf: true,
-			exp: true,
-			maxAgeSec: 14400, // 4 hours
-			timeSkewSec: 15,
-		},
-		validate: (artifacts) => ({
-			isValid: artifacts.decoded.payload.admin === true,
-			credentials: 'hehe',
-		}),
-	});
+	// server.auth.strategy('admin_jwt_strategy', 'jwt', {
+	// 	keys: 'secret',
+	// 	verify: {
+	// 		aud: 'token',
+	// 		iss: 'urn:issuer:test',
+	// 		sub: false,
+	// 		nbf: true,
+	// 		exp: true,
+	// 		maxAgeSec: 14400, // 4 hours
+	// 		timeSkewSec: 15,
+	// 	},
+	// 	validate: (artifacts) => ({
+	// 		isValid: artifacts.decoded.payload.admin === true,
+	// 		credentials: 'hehe',
+	// 	}),
+	// });
 
 	/** ******************************************** */
 	/* ********** User manipulation ***************** */
@@ -99,119 +99,119 @@ const init = async () => {
 	/** ******************************************** */
 	/* ********** Product manipulation ***************** */
 	/** ****************************************** */
-	server.route({
-		method: 'POST',
-		path: '/shop',
-		handler: createProduct,
-		config: {
-			auth: { strategies: ['admin_jwt_strategy'] },
-			payload: {
-				maxBytes: 1024 * 1024 * 5,
-				multipart: {
-					output: 'file',
-				},
-				parse: true,
-			},
-		},
-	});
-	server.route({
-		method: 'PUT',
-		path: '/shop/{id}',
-		handler: modifyProduct,
-		config: {
-			auth: { strategies: ['admin_jwt_strategy'] },
-		},
-	});
-	server.route({
-		method: 'GET',
-		path: '/shop',
-		handler: getShop,
-	});
-	server.route({
-		method: 'GET',
-		path: '/shop/{id}',
-		handler: getProductByID,
-	});
-	server.route({
-		method: 'GET',
-		path: '/shop/product',
-		handler: getProduct,
-	});
-	server.route({
-		method: 'DELETE',
-		path: '/shop/{id}',
-		handler: deleteProduct,
-		config: {
-			auth: { strategies: ['admin_jwt_strategy'] },
-		},
-	});
+	// server.route({
+	// 	method: 'POST',
+	// 	path: '/shop',
+	// 	handler: createProduct,
+	// 	config: {
+	// 		auth: { strategies: ['admin_jwt_strategy'] },
+	// 		payload: {
+	// 			maxBytes: 1024 * 1024 * 5,
+	// 			multipart: {
+	// 				output: 'file',
+	// 			},
+	// 			parse: true,
+	// 		},
+	// 	},
+	// });
+	// server.route({
+	// 	method: 'PUT',
+	// 	path: '/shop/{id}',
+	// 	handler: modifyProduct,
+	// 	config: {
+	// 		auth: { strategies: ['admin_jwt_strategy'] },
+	// 	},
+	// });
+	// server.route({
+	// 	method: 'GET',
+	// 	path: '/shop',
+	// 	handler: getShop,
+	// });
+	// server.route({
+	// 	method: 'GET',
+	// 	path: '/shop/{id}',
+	// 	handler: getProductByID,
+	// });
+	// server.route({
+	// 	method: 'GET',
+	// 	path: '/shop/product',
+	// 	handler: getProduct,
+	// });
+	// server.route({
+	// 	method: 'DELETE',
+	// 	path: '/shop/{id}',
+	// 	handler: deleteProduct,
+	// 	config: {
+	// 		auth: { strategies: ['admin_jwt_strategy'] },
+	// 	},
+	// });
 	/** ******************************************** */
 	/* ********** Category manipulation ***************** */
 	/** ****************************************** */
-	server.route({
-		method: 'POST',
-		path: '/category',
-		handler: createCategory,
-		config: {
-			auth: { strategies: ['admin_jwt_strategy'] },
-		},
-	});
-	server.route({
-		method: 'GET',
-		path: '/category',
-		handler: getCategory,
-		config: {
-			auth: { strategies: ['admin_jwt_strategy'] },
-		},
-	});
-	server.route({
-		method: 'PUT',
-		path: '/category/{id}',
-		handler: modifyCategory,
-		config: {
-			auth: { strategies: ['admin_jwt_strategy'] },
-		},
-	});
-	server.route({
-		method: 'DELETE',
-		path: '/category/{id}',
-		handler: deleteCategory,
-		config: {
-			auth: { strategies: ['admin_jwt_strategy'] },
-		},
-	});
+	// server.route({
+	// 	method: 'POST',
+	// 	path: '/category',
+	// 	handler: createCategory,
+	// 	config: {
+	// 		auth: { strategies: ['admin_jwt_strategy'] },
+	// 	},
+	// });
+	// server.route({
+	// 	method: 'GET',
+	// 	path: '/category',
+	// 	handler: getCategory,
+	// 	config: {
+	// 		auth: { strategies: ['admin_jwt_strategy'] },
+	// 	},
+	// });
+	// server.route({
+	// 	method: 'PUT',
+	// 	path: '/category/{id}',
+	// 	handler: modifyCategory,
+	// 	config: {
+	// 		auth: { strategies: ['admin_jwt_strategy'] },
+	// 	},
+	// });
+	// server.route({
+	// 	method: 'DELETE',
+	// 	path: '/category/{id}',
+	// 	handler: deleteCategory,
+	// 	config: {
+	// 		auth: { strategies: ['admin_jwt_strategy'] },
+	// 	},
+	// });
 
 	/** ******************************************** */
 	/* ********** Image manipulation ***************** */
 	/** ****************************************** */
-	server.route({
-		method: 'POST',
-		path: '/uploadImage',
-		handler: uploadImage,
-		config: {
-			payload: {
-				maxBytes: 1024 * 1024 * 5,
-				multipart: {
-					output: 'file',
-				},
-				parse: true,
-			},
-		},
-	});
-	server.route({
-		method: 'POST',
-		path: '/createImage',
-		handler: createImage,
-		config: {
-			payload: {
-				maxBytes: 1024 * 1024 * 5,
-				multipart: {
-					output: 'file',
-				},
-				parse: true,
-			},
-		},
-	});
+	// server.route({
+	// 	method: 'POST',
+	// 	path: '/uploadImage',
+	// 	handler: uploadImage,
+	// 	config: {
+	// 		payload: {
+	// 			maxBytes: 1024 * 1024 * 5,
+	// 			multipart: {
+	// 				output: 'file',
+	// 			},
+	// 			parse: true,
+	// 		},
+	// 	},
+	// });
+	// server.route({
+	// 	method: 'POST',
+	// 	path: '/createImage',
+	// 	handler: createImage,
+	// 	config: {
+	// 		payload: {
+	// 			maxBytes: 1024 * 1024 * 5,
+	// 			multipart: {
+	// 				output: 'file',
+	// 			},
+	// 			parse: true,
+	// 		},
+	// 	},
+	// });
 
 	await server.start();
 	console.log(`server is running on ${server.info.uri}`);
