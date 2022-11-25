@@ -3,8 +3,9 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/css';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { ReactComponent as Logout } from '../assets/logout.svg';
 
 const DivSvg = styled.div(({ width }) => ({
@@ -20,26 +21,29 @@ const SpanDice = styled.span(({ width = '2px', height = '2px' }) => ({
 	width,
 	height,
 	border: '1px solid red',
-}));
-
-const DivContainer = styled.div(() => ({
-	display: 'flex',
-	justifyContent: 'space-between',
-	alignItems: 'center',
-	margin: '1em',
-	width: '50em',
+	margin: '2px',
 }));
 
 const User = ({
 	userLogin,
 }) => {
-	const dispatch = useDispatch();
-
 	const navigate = useNavigate();
 	const handleLogout = () => {
 		localStorage.clear();
 		navigate('/');
 		window.location.reload(false);
+	};
+	const [dice, setDice] = useState([0, 0, 0, 0, 0]);
+
+	const handleOnClick = () => {
+		setDice([
+			Math.floor(Math.random() * (7 - 1)) + 1,
+			Math.floor(Math.random() * (7 - 1)) + 1,
+			Math.floor(Math.random() * (7 - 1)) + 1,
+			Math.floor(Math.random() * (7 - 1)) + 1,
+			Math.floor(Math.random() * (7 - 1)) + 1,
+
+		]);
 	};
 
 	return (
@@ -49,13 +53,23 @@ const User = ({
 				{`Bonjour ${userLogin.login}`}
 				{/* hello */}
 			</h1>
-			<button css={{ display: 'block' }}> Jouer </button>
+			<button css={{ display: 'block' }} onClick={handleOnClick}> Jouer </button>
 			<div css={{ display: 'block', margin: '10px' }}>
-				<SpanDice> 1</SpanDice>
-				<SpanDice> 2</SpanDice>
-				<SpanDice> 3</SpanDice>
-				<SpanDice> 4</SpanDice>
-				<SpanDice> 5</SpanDice>
+				<SpanDice>
+					{dice[0]}
+				</SpanDice>
+				<SpanDice>
+					{dice[1]}
+				</SpanDice>
+				<SpanDice>
+					{dice[2]}
+				</SpanDice>
+				<SpanDice>
+					{dice[3]}
+				</SpanDice>
+				<SpanDice>
+					{dice[4]}
+				</SpanDice>
 			</div>
 			<DivSvg width="3em" height="10em" onClick={() => handleLogout()}>
 				<Logout />
