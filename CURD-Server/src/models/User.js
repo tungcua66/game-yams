@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema({
 		match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'email not valid!'],
 		unique: true,
 	},
-	mdp: {
+	password: {
 		type: String,
 		required: [true, 'password is required'],
 		unique: true,
@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema({
 
 userSchema.pre('save', async function save(next) {
 	const salt = await bcrypt.genSalt();
-	this.mdp = await bcrypt.hash(this.mdp, salt);
+	this.password = await bcrypt.hash(this.password, salt);
 	next();
 });
 

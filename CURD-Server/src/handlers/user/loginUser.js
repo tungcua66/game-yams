@@ -8,7 +8,7 @@ export default async (request) => {
 		const loginExists = await User.exists({ login: request.payload.login });
 		if (loginExists) {
 			const user = await User.findOne({ login: request.payload.login });
-			const isValid = await bcrypt.compare(request.payload.password, user.mdp);
+			const isValid = await bcrypt.compare(request.payload.password, user.password);
 			let token;
 			if (isValid) {
 				token = createToken(user.admin);
